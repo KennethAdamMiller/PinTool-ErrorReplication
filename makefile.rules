@@ -137,7 +137,6 @@ endif
 # Linux
 ifeq ($(TARGET_OS),linux)
     PIN_SUFFIX=.so
-    BOOST_OBJS=/usr/lib/libboost_iostreams.so -lz /usr/lib/libboost_iostreams.a -lz /usr/local/lib/libzmq.a
     BOOST_OBJS+=
     TEST_TOOL_ROOTS +=
     TEST_ROOTS +=
@@ -175,7 +174,6 @@ endif
 # Mac
 ifeq ($(TARGET_OS),mac)
     PIN_SUFFIX=.dylib
-    BOOST_OBJS=~/boost_1_54_0/bin.v2/libs/iostreams/build/darwin-4.2.1/release/link-static/threading-multi/zlib.o -lz ~/boost_1_54_0/bin.v2/libs/iostreams/build/darwin-4.2.1/release/link-static/threading-multi/libboost_iostreams.a
     TEST_TOOL_ROOTS +=
     TEST_ROOTS +=
     SANITY_SUBSET +=
@@ -286,7 +284,7 @@ all: $(OBJDIR)example$(PIN_SUFFIX)
 OBJECTS=$(OBJDIR)example$(OBJ_SUFFIX)
 
 TOOL_LDFLAGS_NOOPT+=
-TOOL_CXXFLAGS+=-g -std=c++11
+TOOL_CXXFLAGS+=-g -std=c++11 -I./libzmq/include
 #TEST_TOOLS_ROOTS: $(OBJECTS)
 headers=*.h
 
