@@ -284,7 +284,7 @@ all: $(OBJDIR)example$(PIN_SUFFIX)
 OBJECTS=$(OBJDIR)example$(OBJ_SUFFIX)
 
 TOOL_LDFLAGS_NOOPT+=
-TOOL_CXXFLAGS+=-g -std=c++11 -I./libzmq/include
+TOOL_CXXFLAGS+=-g -std=c++11 -I./libzmq/include -fPIC -lzmq
 #TEST_TOOLS_ROOTS: $(OBJECTS)
 headers=*.h
 
@@ -296,7 +296,7 @@ $(OBJDIR)example$(OBJ_SUFFIX): example.*
 
 # Build the tool as a dll (shared object).
 $(OBJDIR)example$(PIN_SUFFIX): $(OBJECTS)
-	$(LINKER) $(TOOL_LDFLAGS_NOOPT) $(LINK_EXE)$@ $(^:%.h=) $(TOOL_LPATHS) $(TOOL_LIBS) $(OBJECTS) $(BOOST_OBJS) -lpthread
+	$(LINKER) $(TOOL_LDFLAGS_NOOPT) $(LINK_EXE)$@ $(^:%.h=) $(TOOL_LPATHS) $(TOOL_LIBS) $(OBJECTS) $(BOOST_OBJS) -lpthread -fPIC -L./libzmq/lib -lzmq
 
 ###### Special applications' build rules ######
 
